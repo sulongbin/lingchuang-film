@@ -10,7 +10,7 @@
 
 ## 下载与安装
 
-下载本 Release 附件 `灵创智影影视全流程-v0.1.2.zip`，解压后阅读《安装与启动说明.md》，在 `lingchuang-film` 目录执行 `install.ps1`。需要 Windows、Codex、Python 3.11+、剪映专业版，以及自己的会员 API Key。安装需要联网取得 Python 依赖；无需 Node 或 Remotion。
+下载本 Release 附件 `lingchuang-film-v0.1.2.zip`（原中文文件名：灵创智影影视全流程-v0.1.2.zip，内容完全相同），解压后阅读《安装与启动说明.md》，在 `lingchuang-film` 目录执行 `install.ps1`。需要 Windows、Codex、Python 3.11+、剪映专业版，以及自己的会员 API Key。安装需要联网取得 Python 依赖；无需 Node 或 Remotion。
 
 安装器遇到已有技能目录会停止，不自动覆盖。升级前备份旧技能，保留原作品 `.film/` 与 `.lczyai/`；历史未知任务按恢复说明核验，不清空记录重做。
 
@@ -38,3 +38,4 @@ fd89ed2b9ef8e29385a16ae1fd82ad391e699d9397e178c0dcd9edecdcc42668
 ```
 
 包内不含会员或供应商密钥、真实项目和第三方音乐素材。原组件来源与许可声明随包保留。
+
