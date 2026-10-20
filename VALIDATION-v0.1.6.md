@@ -12,6 +12,8 @@
 | 无 Node/Git 入口 | 上述完整安装的 PATH 不含 Node.js 或 Git，PowerShell 入口正常完成 |
 | 生产离线测试 | 47 项通过；实际生产脚本及 requirements.txt 与 v0.1.5 字节一致 |
 | ZIP | CRC 校验通过，113 个文件，只有一个 SKILL.md；无 .venv、缓存、作品状态目录或输出素材 |
+| npm 包执行 | 本地 tgz 通过 npm exec 启动千问办公 --check，校验成功，不安装到真实技能目录 |
+| GitHub 远端新手入口 | 发布后匿名下载 main/install.ps1，与已测脚本 SHA-256 一致；脚本从 GitHub 下载新 ZIP，完成校验与 Python 检查 |
 | npm 打包 | 仅包含声明的 9 个文件，约 743 KB；不包含旧发行包或本地工作目录 |
 
 完整安装实测 Python 3.12.14、Windows PowerShell 5.1。依赖下载过程中出现一次 TLS 瞬时失败，pip 重试后成功；未关闭 TLS 校验或改用非官方镜像。
