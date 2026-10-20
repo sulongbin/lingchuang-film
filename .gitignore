@@ -1,0 +1,7 @@
+node_modules/
+*.tgz
+.env
+.npmrc
+.film/
+.lczyai/
+__pycache__/

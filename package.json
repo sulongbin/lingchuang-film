@@ -1,0 +1,26 @@
+{
+  "name": "lingchuang-film",
+  "version": "0.1.5",
+  "private": true,
+  "description": "Windows installer for 灵创智影影视全流程 (Codex / WorkBuddy)",
+  "license": "SEE LICENSE IN USAGE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sulongbin/lingchuang-film.git"
+  },
+  "homepage": "https://lczyai.com",
+  "bin": {
+    "lingchuang-film": "bin/install.cjs"
+  },
+  "files": [
+    "bin/",
+    "scripts/install-from-archive.ps1",
+    "distributions/v0.1.5/",
+    "INSTALL.md",
+    "USAGE.md"
+  ],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test tests/installer.test.cjs"
+  }
+}
