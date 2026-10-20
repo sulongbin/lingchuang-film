@@ -1,84 +1,52 @@
-# 灵创智影影视全流程
+# 灵创智影影视全流程 · Windows v0.1.6
 
-**从剧本、人物与场景资产、分镜，到视频生成，再到 Windows 剪映可编辑交付。**
+从剧本、人物/场景/道具和分镜资产，到会员 API 视频生产、声音字幕预览及 Windows 剪映交付。统一技能名称 **lingchuang-film**；随包包含短剧编剧、影视总导演和灵创生产客户端，未集成 Shotcraft。
 
-官网：**[lczyai.com](https://lczyai.com)**  
-会员生产平台：[chat.lczyai.com](https://chat.lczyai.com)  
-当前技能包：**v0.1.5 Windows 通用版**，支持 Codex / WorkBuddy。
+**官网：[lczyai.com](https://lczyai.com) · 会员平台：[chat.lczyai.com](https://chat.lczyai.com)**
 
-技能可免费下载安装。使用平台生成图片、视频、配音、配乐或后处理服务，需要注册自己的灵创智影账号，创建个人会员 API Key，并按实际报价消耗该账号的积分。安装技能不会获得免费模型额度，也不会自动提交付费生成。
+公开下载和安装无需仓库密码。制作需要注册自己的灵创智影会员账号并创建 API Key；平台生成按自己的权限、报价和实际积分结算。安装不会产生视频生成费用。
 
-## 一条命令安装
+## 新手入口：无需 Node.js、Git
 
-准备 Windows、Node.js 18+（建议当前 LTS，含 npm/npx）、Git、Python 3.11+，以及 Codex 或 WorkBuddy。剪辑交付还需要 Windows 剪映专业版。
+把下面这段话发给正在使用的 Windows 本地智能体：
 
-在 PowerShell 中只运行当前使用平台对应的一条：
+> 请按 https://github.com/sulongbin/lingchuang-film/blob/main/INSTALL.md 安装灵创智影影视全流程，只安装到当前宿主。使用新手 PowerShell 入口；先检查 Python，缺失时向我说明安装内容并取得同意。不要修改系统级脚本策略，不提交付费生成。安装完成后检查入口和依赖，并告诉我如何配置个人 API Key。
 
-**Codex**
+自己操作可在 Windows PowerShell 运行以下命令。示例为**千问办公**；其他软件的 `-App` 值见兼容表。
+
 ```powershell
+$lcInstaller = Join-Path $env:TEMP ("lingchuang-install-" + [guid]::NewGuid().ToString('N') + ".ps1")
+Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/sulongbin/lingchuang-film/main/install.ps1' -OutFile $lcInstaller
+& $lcInstaller -App QwenWork
+```
+
+下载脚本可先打开检查再运行。缺少 Python 时会提示，只有输入 `YES` 才通过 WinGet 为当前用户安装 Python 3.12。脚本策略拦截的处理见 [安装说明](INSTALL.md)，安装器不会自动更改策略。
+
+## 已有 Node.js 和 Git：npm 命令
+
+```powershell
+# 千问办公
+npx.cmd --yes github:sulongbin/lingchuang-film --app qwenwork
+# Codex
 npx.cmd --yes github:sulongbin/lingchuang-film --app codex
 ```
 
-**WorkBuddy**
-```powershell
-npx.cmd --yes github:sulongbin/lingchuang-film --app workbuddy
-```
+其他选项：`workbuddy`、`qwen-code`、`claude-code`、`cursor`、`gemini-cli`、`portable`。一次选择一个。`--check` 只检查包和 Python，不安装技能或补装 Python。通过 GitHub 获取，**并非 npm 注册表的同名包**。
 
-这是 npm/npx 从本 GitHub 仓库获取安装器的方式，不需要 npm 账号或 GitHub 登录，也不是 npm 注册表中的同名包。Windows 使用 `npx.cmd`，避免终端误选 `npx.ps1`。GitHub 与 Python 依赖源需可联网访问。
+## 安装后开始使用
 
-安装器核对 ZIP 的 SHA-256，检查 Python 和本机脚本策略，然后调用包内所选平台的安装入口。只安装一个 `lingchuang-film` 技能；旧版按原安装器规则备份，失败恢复。遇到系统禁止脚本、未知目录、链接或夹带项目时停止。不会自动改变执行策略，也不会清空作品的 `.film` / `.lczyai`。
+1. 访问 [官网](https://lczyai.com) 注册，在会员平台创建自己的 API Key，按 [安装说明](INSTALL.md) 安全配置。
+2. 重新打开智能体，选择 `lingchuang-film`。Codex 用 `$lingchuang-film`；其他宿主见 [兼容表](COMPATIBILITY.md)。
+3. 提供作品目录、已有脚本和素材，选择短剧或商业路线。先确认方案，再分别确认图片和视频的有效报价。
+4. 验收最终素材后，先确认声音字幕短预览，再交付全片和剪映草稿。
 
-完整安装、密钥配置与排障见 **[安装与会员使用说明](INSTALL.md)**。不使用 npm 的用户可下载 [原始完整 ZIP](distributions/v0.1.5/灵创智影影视全流程-v0.1.5-Windows通用版.zip?raw=true)，阅读包内《安装与启动说明.md》。
+**验证边界：**新增智能体已做安装目录适配和隔离测试，不代表各客户端都已完成真实视频生成与剪映验收。见 [验证记录](VALIDATION-v0.1.6.md)。
 
-## 注册账号、配置 API Key
+## 下载与资料
 
-1. 打开 **[灵创智影官网 lczyai.com](https://lczyai.com)**，注册自己的账号。
-2. 登录 [会员生产平台](https://chat.lczyai.com)，在“会员中心 → 资料与安全 → API 密钥”创建个人会员 API Key；具体入口以当前界面为准。
-3. 按 [配置说明](INSTALL.md) 在本机设置环境变量 `LCZYAI_API_KEY`，不要将密钥发到聊天、截图或 GitHub。
-4. 安装后重新打开 Codex / WorkBuddy，让技能先检查环境、账号连接及模型目录。
-5. 确认图片或视频方案和当前报价后再生成。权限、余额与可用模型以当前会员账号为准。
+- [v0.1.6 Windows 完整 ZIP](distributions/v0.1.6/lingchuang-film-v0.1.6-windows.zip)
+- [SHA-256](distributions/v0.1.6/SHA256.txt)
+- [完整安装说明](INSTALL.md) · [智能体兼容表](COMPATIBILITY.md) · [使用与来源](USAGE.md)
+- [v0.1.6 更新说明](RELEASE-v0.1.6.md) · [历史更新](CHANGELOG.md)
 
-GitHub 下载权限与灵创智影会员权限相互独立。公开技能包不提供任何其他会员的 API Key、模型权限或积分。
-
-## 开始制作
-
-Codex 在作品目录输入：
-
-> 使用 $lingchuang-film。我选择商业路线。先读取我的需求、脚本和已有素材，核对环境及会员目录，只补缺项。先给我脚本和资产方案；图片与视频阶段分别确认方案和费用后再生成。生成结果由我验收，同一作品复用同一画布，最终只把确认采用的版本交付 Windows 剪映。
-
-短剧用户将“商业路线”改为“短剧路线”。WorkBuddy 用户在技能列表选择 `lingchuang-film`，或自然语言指定“使用灵创智影影视全流程”。已有剧本、图片或视频可直接接续对应阶段。
-
-## 能力与流程
-
-| 环节 | 能力 |
-|---|---|
-| 短剧编剧 | 选题、人物、结构、正式剧本、分镜；随包包含实际 `5min-drama-contest` 资源 |
-| 影视总导演 | 商业创作、人物/场景/道具资产、镜头语言、表演、连续性检查、审片返修 |
-| 平台生产 | 会员鉴权、兼容模型选择、素材上传、报价、提交、查询、结算、同画布和下载 |
-| 版本与验收 | 图片和视频分别确认；记录来源、返修和采用版本；超分另行确认 |
-| 声音与字幕 | 优先模型原生对白；推荐声音和字幕方案，短预览确认后应用全片 |
-| 最终交付 | 最终确认素材、字幕、分轨声音、初剪 MP4、Windows 剪映可编辑草稿 |
-
-默认提供基础、标准、高级方案，也可指定兼容模型。可用模型、参数、权限及积分以实时会员目录和有效报价为准。
-
-图片与视频方案/费用确认和生成后的验收是不同步骤。付费配音、配乐、返修、动作白膜及超分分别确认。报价过期或变化后重新展示并确认；提交超时或状态不明时核对原任务，不自动重做。未结算积分不记作零。
-
-## 验证与边界
-
-- 原 v0.1.5 包记录 13 项安装隔离测试、47 项生产离线测试通过；本次同步已复跑 47 项生产离线测试。
-- 新 npm 入口的参数校验、Python 版本、ZIP 完整性、CLI 帮助与隔离安装测试通过；Windows PowerShell 5.1 下测试了两个平台、重复安装备份、另一平台不变和未知目录保护。
-- 隔离安装测试跳过依赖，并经用户允许仅测试进程使用 RemoteSigned；没有更改持久执行策略或本机真实技能。
-- 未新增真实付费生成、联网依赖全新安装或 GUI 端到端验收。历史 Windows 剪映 11.5.0.14471 两镜头样例验收不代表所有版本兼容。
-- 尚未集成 Shotcraft、自动语音识别、自动音色替换、口型修复、独立音效生成 API 或完整特效转场库。
-
-## 下载、来源与使用
-
-- [v0.1.5 交付说明](RELEASE-v0.1.5.md)
-- [学员说明 PDF](distributions/v0.1.5/灵创智影影视全流程学员使用与交付说明-v0.1.5.pdf)
-- [SHA-256 校验文件](distributions/v0.1.5/SHA256.txt)
-- [版本记录](CHANGELOG.md)
-- [使用与来源说明](USAGE.md)
-
-仓库公开提供安装入口和完整发行包。ZIP 保持原始字节，完整技能源码、模块和测试仍位于 ZIP 内；npm 入口不改动模型和计费逻辑。历史 Release 及根目录无版本后缀的 Word/PDF 保留，当前使用以本页和 INSTALL.md 为准。
-
-各组件原有来源与许可继续有效，公开下载不等同于将所有第三方内容重新声明为 MIT 等开源许可。作品素材、会员密钥和生产记录应保存在用户本机，不提交到本仓库。
+旧版发行包继续保留。安装器会备份可识别的旧版并在失败时恢复，不删除作品或历史任务。

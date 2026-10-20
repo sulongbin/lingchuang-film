@@ -1,8 +1,8 @@
 {
   "name": "lingchuang-film",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
-  "description": "Windows installer for 灵创智影影视全流程 (Codex / WorkBuddy)",
+  "description": "Windows installer for 灵创智影影视全流程 — 多智能体与新手入口",
   "license": "SEE LICENSE IN USAGE.md",
   "repository": {
     "type": "git",
@@ -14,12 +14,15 @@
   },
   "files": [
     "bin/",
-    "scripts/install-from-archive.ps1",
-    "distributions/v0.1.5/",
+    "install.ps1",
+    "distributions/v0.1.6/",
     "INSTALL.md",
+    "COMPATIBILITY.md",
     "USAGE.md"
   ],
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "test": "node --test tests/installer.test.cjs"
   }

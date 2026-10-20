@@ -10,4 +10,4 @@
 原始完整来源声明随 ZIP 保留，位置为：
 `lingchuang-film/skills/lingchuang-film/licenses/THIRD_PARTY_NOTICES.md`。
 
-本次仅增加 npm 安装入口和公开使用说明，不改模型、会员鉴权、计费或生成逻辑。
+v0.1.6 增加新手安装入口、多智能体目录适配及使用说明，不改模型、会员鉴权、计费或生成逻辑。
