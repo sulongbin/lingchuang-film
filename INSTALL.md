@@ -1,6 +1,6 @@
-# Windows 安装与会员使用 · v0.1.6
+# Windows 安装与会员使用 · v0.1.7
 
-官网：**https://lczyai.com**。注册账号后登录 **https://chat.lczyai.com**，取得自己的会员 API Key。
+官网：**https://lczyai.com**。注册账号后登录 **https://chat.lczyai.com**，通过官方 CLI 完成浏览器会员授权，无需先申请 API Key。
 
 ## 1. 准备环境
 
@@ -63,21 +63,11 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 ```
 再在同一窗口执行安装命令。窗口关闭后该进程设置失效，不改 LocalMachine / CurrentUser。组策略、下载来源标记或签名要求仍可能阻止执行；不要使用 Bypass / Unrestricted 强行绕过。
 
-## 5. 注册并创建个人 API Key
+## 5. 安装 CLI 并授权会员账号
 
-1. 访问 **[灵创智影官网](https://lczyai.com)** 注册账号。
-2. 登录 **[会员生产平台](https://chat.lczyai.com)**。
-3. 打开“会员中心 → 资料与安全 → API 密钥”，创建自己的会员 API Key，入口以实际界面为准。
-4. 在本机 PowerShell 隐藏输入密钥：
+按 [CLI 安装与会员授权](CLI.md) 安装官方 CLI 0.1.1，再执行 `lczyai login`，在灵创智影页面核对并确认授权。无需先申请 API Key，GitHub 登录不代替会员授权。浏览器显示收到回调后还需检查 CLI 登录成功。
 
-```powershell
-$lcSecret = Read-Host '请输入你自己的灵创智影会员 API Key' -AsSecureString
-$lcCredential = [System.Net.NetworkCredential]::new('', $lcSecret)
-[Environment]::SetEnvironmentVariable('LCZYAI_API_KEY', $lcCredential.Password, 'User')
-Remove-Variable lcCredential, lcSecret
-```
-
-密钥保存在本机用户环境变量，同一 Windows 用户运行的程序可能读取它；不要把密钥发到聊天、GitHub、截图或项目清单。安装包不附带密钥。配置后完全退出并重开所选软件，让新进程继承环境变量。
+凭据由 CLI 使用 Windows DPAPI 保存；不会写入作品目录或聊天。`lczyai login --key` 是隐藏输入 Key 的后备方式。已有用户环境变量仍可通过技能 `film_entry.py --transport key` 显式使用；不会自动回退或删除旧变量。
 
 ## 6. 启动并制作
 
@@ -97,7 +87,7 @@ Remove-Variable lcCredential, lcSecret
 - GitHub 下载失败：先确认能打开仓库网页；不要把会员 API Key 当成 GitHub 密码。
 - npm 缓存旧包：需要锁定某次更新时可使用 `github:sulongbin/lingchuang-film#提交SHA`，不要手工混合不同版本的技能文件。
 - 依赖安装失败：查看原安装器日志；保留备份、失败现场及作品数据，解决网络/依赖问题后再重试。
-- 401/403：检查个人会员 Key 和模型权限，不复制别人的密钥。
+- 401/403：检查 CLI 授权是否过期、会员及模型权限；必要时重新执行 `lczyai login`，不要改用别人的密钥。
 - 余额不足：补足自己账号的积分，重新核对报价；未知任务不能通过清空记录重做。
 - 模型更新：以实时会员目录为准，不依据模型名推断接口能力。
 

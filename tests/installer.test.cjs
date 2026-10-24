@@ -7,7 +7,7 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { parseArgs, verifyArchive, validatePython, powershellEnv, ARCHIVE } = require('../bin/install.cjs');
 const root = path.resolve(__dirname, '..');
-const archive = path.join(root, 'distributions', 'v0.1.6', ARCHIVE);
+const archive = path.join(root, 'distributions', 'v0.1.7', ARCHIVE);
 const python = process.env.LC_TEST_PYTHON || 'python';
 
 test('host selection is explicit; missing, dual, duplicate and injected arguments stop', () => {

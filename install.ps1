@@ -11,9 +11,9 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-$ReleaseVersion = '0.1.6'
-$ReleaseHash = 'e6e6e1733222486aaf10c07a25cc2d5d80de5521043ac5f80567f320faca6272'
-$ReleaseURL = 'https://raw.githubusercontent.com/sulongbin/lingchuang-film/main/distributions/v0.1.6/lingchuang-film-v0.1.6-windows.zip'
+$ReleaseVersion = '0.1.7'
+$ReleaseHash = 'c1353967a01a4db02afc341c25b9de65b71bdc37efeea741a035ec001d676efd'
+$ReleaseURL = 'https://raw.githubusercontent.com/sulongbin/lingchuang-film/main/distributions/v0.1.7/lingchuang-film-v0.1.7-windows.zip'
 
 function Test-PythonCandidate([string]$Command, [string[]]$Prefix = @()) {
     if (-not $Command -or -not (Get-Command $Command -ErrorAction SilentlyContinue)) { return $null }
@@ -104,7 +104,7 @@ function Install-LingchuangFilm {
     Expand-Archive -LiteralPath $localArchive -DestinationPath $unpacked
     & (Join-Path $unpacked 'lingchuang-film\install.ps1') -App $selectedApp -UserRoot $UserRoot -PythonExecutable $python -SkipDependencies:$SkipDependencies
     Write-Host 'Use the printed SKILL.md and .venv Python paths in your selected agent. Reopen the app if needed.'
-    Write-Host 'Register at https://lczyai.com and configure your own LCZYAI_API_KEY. Installation does not authorize paid generation.'
+    Write-Host 'Register at https://lczyai.com. Follow CLI.md to install the official CLI and run lczyai login. Installation does not authorize paid generation.'
     Write-Host "Staging retained: $stage"
 }
 

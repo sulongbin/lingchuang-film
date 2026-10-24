@@ -7,9 +7,9 @@ const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 
 const APPS = { codex:'Codex', workbuddy:'WorkBuddy', qwenwork:'QwenWork', 'qwen-code':'QwenCode', 'claude-code':'ClaudeCode', cursor:'Cursor', 'gemini-cli':'GeminiCLI', portable:'Portable' };
-const SHA256 = 'e6e6e1733222486aaf10c07a25cc2d5d80de5521043ac5f80567f320faca6272';
-const ARCHIVE = 'lingchuang-film-v0.1.6-windows.zip';
-const HELP = `灵创智影影视全流程 v0.1.6 — Windows
+const SHA256 = 'c1353967a01a4db02afc341c25b9de65b71bdc37efeea741a035ec001d676efd';
+const ARCHIVE = 'lingchuang-film-v0.1.7-windows.zip';
+const HELP = `灵创智影影视全流程 v0.1.7 — Windows
 官网: https://lczyai.com
 
 npx github:sulongbin/lingchuang-film --app codex
@@ -22,8 +22,8 @@ Options:
   --check               Check the archive and prerequisites without installing.
   --help                Show this help.
 
-Register your own account at https://lczyai.com and configure your personal
-LCZYAI_API_KEY after installation. Installation does not generate media or
+Register your own account at https://lczyai.com. Follow CLI.md to install the
+official CLI and run lczyai login after skill installation. Installation does not generate media or
 spend platform credits. Paid generation requires a separate confirmed quote.
 `;
 
@@ -74,7 +74,7 @@ function main(args = process.argv.slice(2)) {
   if (options.help) { console.log(HELP); return; }
   if (process.platform !== 'win32') throw new Error('This installer supports Windows only.');
   const root = path.resolve(__dirname, '..');
-  const archive = path.join(root, 'distributions', 'v0.1.6', ARCHIVE);
+  const archive = path.join(root, 'distributions', 'v0.1.7', ARCHIVE);
   verifyArchive(archive);
   const powershell = path.join(process.env.SystemRoot || 'C:\\Windows', 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe');
   if (!fs.existsSync(powershell)) throw new Error('Windows PowerShell is unavailable.');
@@ -93,7 +93,7 @@ function main(args = process.argv.slice(2)) {
   ], { stdio: 'inherit', shell: false, env: powershellEnv() });
   if (result.error) throw new Error(`Could not start PowerShell: ${result.error.message}`);
   if (result.status !== 0) throw new Error(`Installation failed (${result.status ?? result.signal}). See the installer output; no execution-policy bypass was applied.`);
-  if (!options.check) console.log('Restart your selected app. Configure your own member API Key using INSTALL.md.');
+  if (!options.check) console.log('Restart your selected app. Follow CLI.md to install the official CLI and run lczyai login.');
 }
 
 module.exports = { APPS, parseArgs, verifyArchive, validatePython, powershellEnv, SHA256, ARCHIVE };
