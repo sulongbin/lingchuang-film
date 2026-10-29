@@ -4,7 +4,7 @@
 
 ## 安装与登录
 
-1. 从 [会员平台官网](https://chat.lczyai.com/downloads/lczyai-cli-0.1.1-win-x64.zip) 下载 Windows CLI，核对 [SHA-256 文件](https://chat.lczyai.com/downloads/lczyai-cli-0.1.1-win-x64.zip.sha256)。本版 SHA-256 为 `27582851d8f5c1be3e43651c55ac56b667701d0642693d80651971e1628cd7d5`，大小 65,822,815 字节；不匹配则停止，不执行包内程序。
+1. 从 [官方 OSS 直连地址](https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/public/distribution/cli/0.1.1/27582851d8f5c1be3e43651c55ac56b667701d0642693d80651971e1628cd7d5/lczyai-cli-0.1.1-win-x64.zip) 下载 Windows CLI，核对 [SHA-256 文件](https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/public/distribution/cli/0.1.1/27582851d8f5c1be3e43651c55ac56b667701d0642693d80651971e1628cd7d5/lczyai-cli-0.1.1-win-x64.zip.sha256)。本版 SHA-256 为 `27582851d8f5c1be3e43651c55ac56b667701d0642693d80651971e1628cd7d5`，大小 65,822,815 字节；不匹配则停止，不执行包内程序。
 2. 解压并运行 `Install.cmd`。安装到 `%LOCALAPPDATA%\LingchuangCLIApp`，不修改旧 Key 环境变量。发行包尚无发布者代码签名，不绕过系统安全提示。
 3. 新终端运行 `lczyai login`，在 `https://chat.lczyai.com` 登录会员账号，核对账号、权限和期限后由会员确认授权。这不是 GitHub 登录，也不要求先创建 API Key。授权请求有效 5 分钟；过期时重新执行登录并打开新链接，不能反复使用旧页。
 4. 浏览器出现 `Authorization received` 后仍要检查 CLI 返回 `logged_in: true`，再运行 `lczyai auth status` 和 `lczyai doctor`。浏览器只收到回调不代表令牌交换或本地保存必然成功。
