@@ -1,4 +1,4 @@
-> v0.1.7：默认会员接入改为 [CLI 浏览器授权](CLI.md)，不再要求先配置环境变量 Key。原宿主目录和生产能力边界保持不变。
+> v0.1.8：默认会员接入改为 [CLI 浏览器授权](CLI.md)，不再要求先配置环境变量 Key。原宿主目录和生产能力边界保持不变。
 
 # 智能体兼容与验证范围
 
@@ -21,7 +21,7 @@ PowerShell `-App` 分别为 `Codex`、`WorkBuddy`、`QwenWork`、`QwenCode`、`C
 
 ## 支持到哪一步
 
-- 安装器：本机 Windows PowerShell 5.1 隔离目录测试，具体结果见仓库 [验证记录](https://github.com/sulongbin/lingchuang-film/blob/main/VALIDATION-v0.1.7.md)。
+- 安装器：本机 Windows PowerShell 5.1 隔离目录测试，具体结果见仓库 [验证记录](https://github.com/sulongbin/lingchuang-film/blob/main/VALIDATION-v0.1.8.md)。
 - 新增宿主：依据下列官方文档实现目录适配，**尚未逐个打开客户端并完成会员视频生成验收**。软件版本、企业策略、文件和终端权限可能影响加载。
 - Windows 完整制作需要本地文件读写、Python 3.11+（64 位）、访问会员 API 的 HTTPS 能力。剪映交付还需要本机剪映专业版，并单独检查草稿打开和编辑。
 - 仅网页版聊天、手机端、无本地执行器的云会话不能仅凭此 Windows 安装命令获得全部能力。Claude Code 不等于 Claude 网页版/Cowork；Qwen Code 不等于千问办公。

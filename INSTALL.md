@@ -1,4 +1,4 @@
-# Windows 安装与会员使用 · v0.1.7
+# Windows 安装与会员使用 · v0.1.8
 
 官网：**https://lczyai.com**。注册账号后登录 **https://chat.lczyai.com**，通过官方 CLI 完成浏览器会员授权，无需先申请 API Key。
 
@@ -15,7 +15,7 @@
 
 ```powershell
 $lcInstaller = Join-Path $env:TEMP ("lingchuang-install-" + [guid]::NewGuid().ToString('N') + ".ps1")
-Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/sulongbin/lingchuang-film/main/install.ps1' -OutFile $lcInstaller
+Invoke-WebRequest -UseBasicParsing 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/install.ps1' -OutFile $lcInstaller
 & $lcInstaller -App QwenWork
 ```
 

@@ -7,9 +7,9 @@ const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 
 const APPS = { codex:'Codex', workbuddy:'WorkBuddy', qwenwork:'QwenWork', 'qwen-code':'QwenCode', 'claude-code':'ClaudeCode', cursor:'Cursor', 'gemini-cli':'GeminiCLI', portable:'Portable' };
-const SHA256 = 'c1353967a01a4db02afc341c25b9de65b71bdc37efeea741a035ec001d676efd';
-const ARCHIVE = 'lingchuang-film-v0.1.7-windows.zip';
-const HELP = `灵创智影影视全流程 v0.1.7 — Windows
+const SHA256 = 'fd85c8bbadf28100f0f091c16a4cc801cc8e6ba98734c4b55398bc08562e624f';
+const ARCHIVE = 'lingchuang-film-v0.1.8-windows.zip';
+const HELP = `灵创智影影视全流程 v0.1.8 — Windows
 官网: https://lczyai.com
 
 npx github:sulongbin/lingchuang-film --app codex
@@ -74,8 +74,6 @@ function main(args = process.argv.slice(2)) {
   if (options.help) { console.log(HELP); return; }
   if (process.platform !== 'win32') throw new Error('This installer supports Windows only.');
   const root = path.resolve(__dirname, '..');
-  const archive = path.join(root, 'distributions', 'v0.1.7', ARCHIVE);
-  verifyArchive(archive);
   const powershell = path.join(process.env.SystemRoot || 'C:\\Windows', 'System32', 'WindowsPowerShell', 'v1.0', 'powershell.exe');
   if (!fs.existsSync(powershell)) throw new Error('Windows PowerShell is unavailable.');
   const policy = spawnSync(powershell, ['-NoProfile', '-Command', 'Get-ExecutionPolicy'],
@@ -89,7 +87,7 @@ function main(args = process.argv.slice(2)) {
   if (options.check) extra.push('-Check');
   const result = spawnSync(powershell, [
     '-NoLogo', '-NoProfile', '-File', path.join(root, 'install.ps1'),
-    '-Archive', archive, '-App', APPS[options.app], ...extra
+    '-App', APPS[options.app], ...extra
   ], { stdio: 'inherit', shell: false, env: powershellEnv() });
   if (result.error) throw new Error(`Could not start PowerShell: ${result.error.message}`);
   if (result.status !== 0) throw new Error(`Installation failed (${result.status ?? result.signal}). See the installer output; no execution-policy bypass was applied.`);

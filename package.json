@@ -1,6 +1,6 @@
 {
   "name": "lingchuang-film",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": true,
   "description": "Windows installer for 灵创智影影视全流程 — 多智能体与新手入口",
   "license": "SEE LICENSE IN USAGE.md",
@@ -15,7 +15,6 @@
   "files": [
     "bin/",
     "install.ps1",
-    "distributions/v0.1.7/",
     "INSTALL.md",
     "COMPATIBILITY.md",
     "USAGE.md",

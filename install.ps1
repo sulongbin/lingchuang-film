@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param(
     [ValidateSet('Codex','WorkBuddy','QwenWork','QwenCode','ClaudeCode','Cursor','GeminiCLI','Portable')]
     [string]$App,
@@ -11,9 +11,9 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-$ReleaseVersion = '0.1.7'
-$ReleaseHash = 'c1353967a01a4db02afc341c25b9de65b71bdc37efeea741a035ec001d676efd'
-$ReleaseURL = 'https://raw.githubusercontent.com/sulongbin/lingchuang-film/main/distributions/v0.1.7/lingchuang-film-v0.1.7-windows.zip'
+$ReleaseVersion = '0.1.8'
+$ReleaseHash = 'fd85c8bbadf28100f0f091c16a4cc801cc8e6ba98734c4b55398bc08562e624f'
+$ReleaseURL = 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/lingchuang-film-v0.1.8-windows.zip'
 
 function Test-PythonCandidate([string]$Command, [string[]]$Prefix = @()) {
     if (-not $Command -or -not (Get-Command $Command -ErrorAction SilentlyContinue)) { return $null }

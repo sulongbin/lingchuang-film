@@ -1,5 +1,5 @@
 'use strict';
-const { test } = require('node:test');
+const { test, before } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
@@ -7,7 +7,16 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { parseArgs, verifyArchive, validatePython, powershellEnv, ARCHIVE } = require('../bin/install.cjs');
 const root = path.resolve(__dirname, '..');
-const archive = path.join(root, 'distributions', 'v0.1.7', ARCHIVE);
+const bundled = path.join(root, 'distributions', 'v0.1.8', ARCHIVE);
+const archive = fs.existsSync(bundled) ? bundled : path.join(fs.mkdtempSync(path.join(os.tmpdir(),'lc-test-release-')), ARCHIVE);
+before(async () => {
+  if (!fs.existsSync(archive)) {
+    const response = await fetch('https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/' + ARCHIVE, {signal: AbortSignal.timeout(120000)});
+    assert(response.ok, 'OSS release download failed');
+    fs.writeFileSync(archive, Buffer.from(await response.arrayBuffer()));
+  }
+  verifyArchive(archive);
+});
 const python = process.env.LC_TEST_PYTHON || 'python';
 
 test('host selection is explicit; missing, dual, duplicate and injected arguments stop', () => {

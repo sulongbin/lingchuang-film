@@ -1,10 +1,14 @@
-# 灵创智影影视全流程 · Windows v0.1.7
+# 灵创智影影视全流程 · Windows v0.1.8
+
+v0.1.8：H3 / WAN 主流候选，首尾帧 H3 / VEO；三个快捷推荐之外可输入模型名。最低分辨率试稿，优先视频原声，剪辑确认后按需报价超分。2026-10-30 已核对 WAN 官方标准与 Prime 上线会员目录；实际可提交范围仍以当次目录为准。
 
 从剧本、人物/场景/道具和分镜资产，到会员 API 视频生产、声音字幕预览及 Windows 剪映交付。统一技能名称 **lingchuang-film**；随包包含短剧编剧、影视总导演和灵创生产客户端，未集成 Shotcraft。
 
 **官网：[lczyai.com](https://lczyai.com) · 会员平台：[chat.lczyai.com](https://chat.lczyai.com)**
 
 公开下载和安装无需仓库密码。制作需要注册自己的灵创智影会员账号，并通过官方 CLI 在浏览器中授权；无需先申请 API Key。平台生成按自己的权限、报价和实际积分结算。安装不会产生视频生成费用。
+
+安装脚本、技能 ZIP 和 CLI ZIP 使用阿里云 OSS HTTPS 直连，下载技能包后校验固定 SHA-256。npm 入口仍需访问 GitHub 获取安装器代码；网络不便时优先使用下方 OSS 新手入口。Python 依赖仍从其配置的软件源安装。
 
 ## 新手入口：无需 Node.js、Git
 
@@ -16,7 +20,7 @@
 
 ```powershell
 $lcInstaller = Join-Path $env:TEMP ("lingchuang-install-" + [guid]::NewGuid().ToString('N') + ".ps1")
-Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/sulongbin/lingchuang-film/main/install.ps1' -OutFile $lcInstaller
+Invoke-WebRequest -UseBasicParsing 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/install.ps1' -OutFile $lcInstaller
 ```
 
 然后在**同一个窗口**，只复制执行下列与你使用的软件对应的一条命令，无需全部执行：
@@ -134,13 +138,13 @@ npx.cmd --yes github:sulongbin/lingchuang-film --app portable
 3. 提供作品目录、已有脚本和素材，选择短剧或商业路线。先确认方案，再分别确认图片和视频的有效报价。
 4. 验收最终素材后，先确认声音字幕短预览，再交付全片和剪映草稿。
 
-**验证边界：**新增智能体已做安装目录适配和隔离测试，不代表各客户端都已完成真实视频生成与剪映验收。见 [验证记录](VALIDATION-v0.1.7.md)。CLI 自带运行时，影视技能仍需要 Python；旧 Key 接入作为显式后备保留。
+**验证边界：**新增智能体已做安装目录适配和隔离测试，不代表各客户端都已完成真实视频生成与剪映验收。见 [验证记录](VALIDATION-v0.1.8.md)。CLI 自带运行时，影视技能仍需要 Python；旧 Key 接入作为显式后备保留。
 
 ## 下载与资料
 
-- [v0.1.7 Windows 完整 ZIP](distributions/v0.1.7/lingchuang-film-v0.1.7-windows.zip)
-- [SHA-256](distributions/v0.1.7/SHA256.txt)
+- [v0.1.8 Windows 完整 ZIP](https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/lingchuang-film-v0.1.8-windows.zip)
+- [SHA-256](https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/SHA256.txt)
 - [完整安装说明](INSTALL.md) · [智能体兼容表](COMPATIBILITY.md) · [使用与来源](USAGE.md)
-- [v0.1.7 更新说明](RELEASE-v0.1.7.md) · [历史更新](CHANGELOG.md)
+- [v0.1.8 更新说明](RELEASE-v0.1.8.md) · [历史更新](CHANGELOG.md)
 
 旧版发行包继续保留。安装器会备份可识别的旧版并在失败时恢复，不删除作品或历史任务。
