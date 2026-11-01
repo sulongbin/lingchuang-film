@@ -1,4 +1,4 @@
-# 灵创智影影视全流程 · Windows v0.1.8
+# 灵创智影影视全流程 · Windows v0.1.8 / Linux v0.1.9-linux
 
 v0.1.8：H3 / WAN 主流候选，首尾帧 H3 / VEO；三个快捷推荐之外可输入模型名。最低分辨率试稿，优先视频原声，剪辑确认后按需报价超分。2026-10-30 已核对 WAN 官方标准与 Prime 上线会员目录；实际可提交范围仍以当次目录为准。
 
@@ -6,11 +6,25 @@ v0.1.8：H3 / WAN 主流候选，首尾帧 H3 / VEO；三个快捷推荐之外�
 
 **官网：[lczyai.com](https://lczyai.com) · 会员平台：[chat.lczyai.com](https://chat.lczyai.com)**
 
-公开下载和安装无需仓库密码。制作需要注册自己的灵创智影会员账号，并通过官方 CLI 在浏览器中授权；无需先申请 API Key。平台生成按自己的权限、报价和实际积分结算。安装不会产生视频生成费用。
+公开下载和安装无需仓库密码。制作需要注册自己的灵创智影会员账号；Windows 通过官方 CLI 浏览器授权，Linux 云端通过会员 API Key 接入。平台生成按自己的权限、报价和实际积分结算。安装不会产生视频生成费用。
 
 安装脚本、技能 ZIP 和 CLI ZIP 使用阿里云 OSS HTTPS 直连，下载技能包后校验固定 SHA-256。npm 入口仍需访问 GitHub 获取安装器代码；网络不便时优先使用下方 OSS 新手入口。Python 依赖仍从其配置的软件源安装。
 
-## 新手入口：无需 Node.js、Git
+## 按运行环境选择版本
+
+- **Windows v0.1.8**：保留浏览器会员授权、完整制作、剪映草稿和成片剪辑；下方 PowerShell/npm 命令继续安装 Windows 版。
+- **Linux 云端专用 v0.1.9-linux**：使用会员 API Key，云端执行，交付会员本人画布中的逐镜视频；不运行 Windows CLI、不强制剪映。详见 [Linux 安装与 Secret 配置](LINUX.md)。
+
+Linux 云端 Codex 安装：
+
+```sh
+curl -fL --proto '=https' --tlsv1.2 https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.9-linux/install-linux.sh -o install-linux.sh
+bash install-linux.sh --app codex
+```
+
+需要 Python 3.10+，无第三方 Python 依赖。会员 Key 通过云宿主 Secret 注入 `LCZYAI_API_KEY`，不要发到聊天；安装不授权付费生成。
+
+## Windows 新手入口：无需 Node.js、Git
 
 把下面这段话发给正在使用的 Windows 本地智能体：
 
