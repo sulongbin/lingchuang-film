@@ -1,4 +1,4 @@
-# Windows 安装与会员使用 · v0.1.8
+# Windows 安装与会员使用 · v0.1.10
 
 官网：**https://lczyai.com**。注册账号后登录 **https://chat.lczyai.com**，通过官方 CLI 完成浏览器会员授权，无需先申请 API Key。
 
@@ -15,11 +15,11 @@
 
 ```powershell
 $lcInstaller = Join-Path $env:TEMP ("lingchuang-install-" + [guid]::NewGuid().ToString('N') + ".ps1")
-Invoke-WebRequest -UseBasicParsing 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/install.ps1' -OutFile $lcInstaller
+Invoke-WebRequest -UseBasicParsing 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10/install.ps1' -OutFile $lcInstaller
 & $lcInstaller -App QwenWork
 ```
 
-不指定 `-App` 时询问一个目标。脚本先验证 ZIP 的 SHA-256，寻找可用 Python（包括 Python Launcher），安装技能的独立 `.venv` 及固定依赖，然后执行本地依赖自检。它不读取 API Key、不提交生成。
+不指定 `-App` 时询问一个目标。脚本先验证 ZIP 的 SHA-256，寻找可用 Python（包括 Python Launcher），安装技能的独立 `.venv`，然后执行基础生产自检；剪辑依赖按需安装。它不读取 API Key、不提交生成。
 
 找不到 Python 时，只有输入 `YES` 才运行 WinGet：安装当前用户级 `Python.Python.3.12`，使用 winget 源并接受对应源与软件协议；拒绝会停止。无 WinGet 时给出 [Python 官方下载入口](https://www.python.org/downloads/windows/)。智能体没有交互终端时，应先向用户解释并取得授权，再加 `-InstallPython`；不能默认代答 YES。
 
@@ -65,7 +65,7 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
 
 ## 5. 安装 CLI 并授权会员账号
 
-按 [CLI 安装与会员授权](CLI.md) 安装官方 CLI 0.1.1，再执行 `lczyai login`，在灵创智影页面核对并确认授权。无需先申请 API Key，GitHub 登录不代替会员授权。浏览器显示收到回调后还需检查 CLI 登录成功。
+按 [CLI 安装与会员授权](CLI.md) 安装官方 CLI 0.1.2，让智能体执行 `lczyai login --start` 并按 session_id 等待查询；会员在灵创智影页面核对并确认授权。无需先申请 API Key，GitHub 登录不代替会员授权。浏览器显示收到回调后还需检查 CLI 登录成功。
 
 凭据由 CLI 使用 Windows DPAPI 保存；不会写入作品目录或聊天。`lczyai login --key` 是隐藏输入 Key 的后备方式。已有用户环境变量仍可通过技能 `film_entry.py --transport key` 显式使用；不会自动回退或删除旧变量。
 

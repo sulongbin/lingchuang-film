@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$Archive,
     [Parameter(Mandatory=$true)][string]$Destination,
@@ -9,7 +9,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-if ((Get-FileHash -LiteralPath $Archive -Algorithm SHA256).Hash -ne '13e69fa232a691e550060dccd3645ad681881eb5578c27238aa08448051cf2f4') {
+if ((Get-FileHash -LiteralPath $Archive -Algorithm SHA256).Hash -ne 'bb5346cdee4bcefce9a2f3b1813f6e10d8618ca3bb51ea4ba24d4ce8221ddd87') {
     throw 'Archive checksum mismatch.'
 }
 if (-not [IO.Path]::IsPathRooted($Destination) -or (Test-Path -LiteralPath $Destination)) {

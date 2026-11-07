@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [ValidateSet('Codex','WorkBuddy','QwenWork','QwenCode','ClaudeCode','Cursor','GeminiCLI','Portable')]
     [string]$App,
@@ -7,13 +7,14 @@ param(
     [switch]$Check,
     [string]$Archive,
     [string]$UserRoot = $env:USERPROFILE,
-    [switch]$SkipDependencies
+    [switch]$SkipDependencies,
+    [switch]$InstallEditingDependencies
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-$ReleaseVersion = '0.1.8'
-$ReleaseHash = 'fd85c8bbadf28100f0f091c16a4cc801cc8e6ba98734c4b55398bc08562e624f'
-$ReleaseURL = 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/lingchuang-film-v0.1.8-windows.zip'
+$ReleaseVersion = '0.1.10'
+$ReleaseHash = 'bb5346cdee4bcefce9a2f3b1813f6e10d8618ca3bb51ea4ba24d4ce8221ddd87'
+$ReleaseURL = 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10/lingchuang-film-v0.1.10-windows.zip'
 
 function Test-PythonCandidate([string]$Command, [string[]]$Prefix = @()) {
     if (-not $Command -or -not (Get-Command $Command -ErrorAction SilentlyContinue)) { return $null }
@@ -91,7 +92,15 @@ function Install-LingchuangFilm {
     if (-not $localArchive) {
         $localArchive = Join-Path $stage 'package.zip'
         [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
-        Invoke-WebRequest -UseBasicParsing -Uri $ReleaseURL -OutFile $localArchive -TimeoutSec 120
+        for ($attempt = 1; $attempt -le 3; $attempt++) {
+            try {
+                Invoke-WebRequest -UseBasicParsing -Uri $ReleaseURL -OutFile $localArchive -TimeoutSec 120
+                break
+            } catch {
+                if ($attempt -eq 3) { throw '技能包下载失败。可另行下载完整 ZIP，使用 -Archive 指定本地文件；未修改旧技能。' }
+                Start-Sleep -Seconds 2
+            }
+        }
     }
     Assert-ReleaseArchive $localArchive
     $env:PYTHONUTF8 = '1'
@@ -102,7 +111,7 @@ function Install-LingchuangFilm {
     }
     $unpacked = Join-Path $stage 'unpacked'
     Expand-Archive -LiteralPath $localArchive -DestinationPath $unpacked
-    & (Join-Path $unpacked 'lingchuang-film\install.ps1') -App $selectedApp -UserRoot $UserRoot -PythonExecutable $python -SkipDependencies:$SkipDependencies
+    & (Join-Path $unpacked 'lingchuang-film\install.ps1') -App $selectedApp -UserRoot $UserRoot -PythonExecutable $python -SkipDependencies:$SkipDependencies -InstallEditingDependencies:$InstallEditingDependencies
     Write-Host 'Use the printed SKILL.md and .venv Python paths in your selected agent. Reopen the app if needed.'
     Write-Host 'Register at https://lczyai.com. Follow CLI.md to install the official CLI and run lczyai login. Installation does not authorize paid generation.'
     Write-Host "Staging retained: $stage"

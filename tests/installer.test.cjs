@@ -7,11 +7,11 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { parseArgs, verifyArchive, validatePython, powershellEnv, ARCHIVE } = require('../bin/install.cjs');
 const root = path.resolve(__dirname, '..');
-const bundled = path.join(root, 'distributions', 'v0.1.8', ARCHIVE);
+const bundled = path.join(root, 'distributions', 'v0.1.10', ARCHIVE);
 const archive = fs.existsSync(bundled) ? bundled : path.join(fs.mkdtempSync(path.join(os.tmpdir(),'lc-test-release-')), ARCHIVE);
 before(async () => {
   if (!fs.existsSync(archive)) {
-    const response = await fetch('https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.8/' + ARCHIVE, {signal: AbortSignal.timeout(120000)});
+    const response = await fetch('https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10/' + ARCHIVE, {signal: AbortSignal.timeout(120000)});
     assert(response.ok, 'OSS release download failed');
     fs.writeFileSync(archive, Buffer.from(await response.arrayBuffer()));
   }
@@ -40,11 +40,11 @@ test('real prerequisite detection and mocked consent/WinGet branches', {skip:pro
 
 test('npm check uses shared bootstrap and cannot install a missing Python', {skip:process.platform !== 'win32'}, () => {
   const cli = path.join(root,'bin/install.cjs');
-  const good = spawnSync(process.execPath,[cli,'--app','qwenwork','--check','--python',python],
+  const good = spawnSync(process.execPath,[cli,'--app','qwenwork','--check','--python',python,'--archive',archive],
     {encoding:'utf8',timeout:45000,env:powershellEnv()});
   assert.equal(good.status,0,good.stdout+good.stderr);
   assert.match(good.stdout,/CHECK OK/);
-  const bad = spawnSync(process.execPath,[cli,'--app','portable','--check','--install-python','--python','Z:\\missing.exe'],
+  const bad = spawnSync(process.execPath,[cli,'--app','portable','--check','--install-python','--python','Z:\\missing.exe','--archive',archive],
     {encoding:'utf8',timeout:45000,env:powershellEnv()});
   assert.notEqual(bad.status,0);
   assert.match(bad.stdout+bad.stderr,/CHECK FAILED/);
@@ -100,7 +100,7 @@ test('real Windows extraction, host isolation, upgrade backup and unknown-direct
     assert.ok(backups.some(b => fs.existsSync(path.join(userRoot,'.lingchuang-skill-backups',b,'lingchuang-film','SKILL.md'))));
     const log = JSON.parse(fs.readFileSync(path.join(skill,'installation.json'),'utf8').replace(/^\uFEFF/,''));
     assert.equal(log.app,app);
-    assert.equal(log.dependenciesChecked,false);
+    assert.equal(log.productionRuntimeChecked,false);
   }
   const unknown = path.join(temp,'unknown-user');
   const target = path.join(unknown,'.agents','skills','lingchuang-film');

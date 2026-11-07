@@ -7,9 +7,9 @@ const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 
 const APPS = { codex:'Codex', workbuddy:'WorkBuddy', qwenwork:'QwenWork', 'qwen-code':'QwenCode', 'claude-code':'ClaudeCode', cursor:'Cursor', 'gemini-cli':'GeminiCLI', portable:'Portable' };
-const SHA256 = 'fd85c8bbadf28100f0f091c16a4cc801cc8e6ba98734c4b55398bc08562e624f';
-const ARCHIVE = 'lingchuang-film-v0.1.8-windows.zip';
-const HELP = `灵创智影影视全流程 v0.1.8 — Windows
+const SHA256 = 'bb5346cdee4bcefce9a2f3b1813f6e10d8618ca3bb51ea4ba24d4ce8221ddd87';
+const ARCHIVE = 'lingchuang-film-v0.1.10-windows.zip';
+const HELP = `灵创智影影视全流程 v0.1.10 — Windows
 官网: https://lczyai.com
 
 npx github:sulongbin/lingchuang-film --app codex
@@ -20,6 +20,7 @@ Options:
   --python PATH         Python 3.11+ executable (default: auto-detect).
   --install-python      Consent to per-user Python 3.12 installation via WinGet if missing.
   --check               Check the archive and prerequisites without installing.
+  --archive PATH        Use the matching local ZIP; SHA-256 is still enforced.
   --help                Show this help.
 
 Register your own account at https://lczyai.com. Follow CLI.md to install the
@@ -37,7 +38,7 @@ function parseArgs(args) {
     if (arg === '--help' || arg === '-h') result.help = true;
     else if (arg === '--check') result.check = true;
     else if (arg === '--install-python') result.installPython = true;
-    else if (arg === '--app' || arg === '--python') {
+    else if (arg === '--app' || arg === '--python' || arg === '--archive') {
       const value = args[++i];
       if (!value || value.startsWith('-')) throw new Error(`Missing value: ${arg}`);
       result[arg.slice(2)] = value;
@@ -83,6 +84,7 @@ function main(args = process.argv.slice(2)) {
     throw new Error(`PowerShell policy is ${policy.stdout.trim()}; scripts cannot run. See INSTALL.md. No policy was changed.`);
   const extra = [];
   if (options.python) extra.push('-PythonExecutable', options.python);
+  if (options.archive) extra.push('-Archive', path.resolve(options.archive));
   if (options.installPython) extra.push('-InstallPython');
   if (options.check) extra.push('-Check');
   const result = spawnSync(powershell, [
