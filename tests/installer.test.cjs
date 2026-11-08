@@ -7,11 +7,11 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { parseArgs, verifyArchive, validatePython, powershellEnv, ARCHIVE } = require('../bin/install.cjs');
 const root = path.resolve(__dirname, '..');
-const bundled = path.join(root, 'distributions', 'v0.1.10', ARCHIVE);
+const bundled = path.join(root, 'distributions', 'v0.1.11', ARCHIVE);
 const archive = fs.existsSync(bundled) ? bundled : path.join(fs.mkdtempSync(path.join(os.tmpdir(),'lc-test-release-')), ARCHIVE);
 before(async () => {
   if (!fs.existsSync(archive)) {
-    const response = await fetch('https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10/' + ARCHIVE, {signal: AbortSignal.timeout(120000)});
+    const response = await fetch('https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.11/' + ARCHIVE, {signal: AbortSignal.timeout(120000)});
     assert(response.ok, 'OSS release download failed');
     fs.writeFileSync(archive, Buffer.from(await response.arrayBuffer()));
   }

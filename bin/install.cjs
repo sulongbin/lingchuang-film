@@ -7,9 +7,9 @@ const crypto = require('node:crypto');
 const { spawnSync } = require('node:child_process');
 
 const APPS = { codex:'Codex', workbuddy:'WorkBuddy', qwenwork:'QwenWork', 'qwen-code':'QwenCode', 'claude-code':'ClaudeCode', cursor:'Cursor', 'gemini-cli':'GeminiCLI', portable:'Portable' };
-const SHA256 = 'bb5346cdee4bcefce9a2f3b1813f6e10d8618ca3bb51ea4ba24d4ce8221ddd87';
-const ARCHIVE = 'lingchuang-film-v0.1.10-windows.zip';
-const HELP = `灵创智影影视全流程 v0.1.10 — Windows
+const SHA256 = '62051029985aa1b628718e856227b5dfc61765edeb9ccd54a482979abb3a8bf2';
+const ARCHIVE = 'lingchuang-film-v0.1.11-windows.zip';
+const HELP = `灵创智影影视全流程 v0.1.11 — Windows
 官网: https://lczyai.com
 
 npx github:sulongbin/lingchuang-film --app codex

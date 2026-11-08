@@ -9,7 +9,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-if ((Get-FileHash -LiteralPath $Archive -Algorithm SHA256).Hash -ne 'bb5346cdee4bcefce9a2f3b1813f6e10d8618ca3bb51ea4ba24d4ce8221ddd87') {
+if ((Get-FileHash -LiteralPath $Archive -Algorithm SHA256).Hash -ne '62051029985aa1b628718e856227b5dfc61765edeb9ccd54a482979abb3a8bf2') {
     throw 'Archive checksum mismatch.'
 }
 if (-not [IO.Path]::IsPathRooted($Destination) -or (Test-Path -LiteralPath $Destination)) {

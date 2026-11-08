@@ -12,9 +12,9 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-$ReleaseVersion = '0.1.10'
-$ReleaseHash = 'bb5346cdee4bcefce9a2f3b1813f6e10d8618ca3bb51ea4ba24d4ce8221ddd87'
-$ReleaseURL = 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10/lingchuang-film-v0.1.10-windows.zip'
+$ReleaseVersion = '0.1.11'
+$ReleaseHash = '62051029985aa1b628718e856227b5dfc61765edeb9ccd54a482979abb3a8bf2'
+$ReleaseURL = 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.11/lingchuang-film-v0.1.11-windows.zip'
 
 function Test-PythonCandidate([string]$Command, [string[]]$Prefix = @()) {
     if (-not $Command -or -not (Get-Command $Command -ErrorAction SilentlyContinue)) { return $null }

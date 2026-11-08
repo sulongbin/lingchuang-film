@@ -1,4 +1,6 @@
-# 灵创智影影视全流程 · Windows v0.1.10 / Linux v0.1.10-linux
+# 灵创智影影视全流程 · Windows v0.1.11 / Linux v0.1.11-linux
+
+Muse 视频 · 多米已纳入图生视频优先推荐：需 1–8 张图片，10/20/30 秒，720P；原生声音待核对，首尾帧仍用兼容模型。目录参考价 0.546 积分/秒，实际以会员确认的有效报价为准。详见 [本版模型规则](RELEASE-v0.1.11.md)。
 
 ## 老用户升级：复制给原来的智能体
 
@@ -10,7 +12,7 @@
 
 具体安装与授权方式见 [安装说明](INSTALL.md)、[CLI 授权说明](CLI.md)；Linux 云端技能沿用其 [Secret/API Key 接入说明](LINUX.md)。
 
-v0.1.10：仅停用 NSDD H3，保留 RH H3、NSDD SD2.5 和其他模型；基础安装不再等待剪辑依赖下载。H3 / WAN 主流候选，首尾帧 H3 / VEO；三个快捷推荐之外可输入模型名。最低分辨率试稿，优先视频原声，剪辑确认后按需报价超分。2026-10-30 已核对 WAN 官方标准与 Prime 上线会员目录；实际可提交范围仍以当次目录为准。
+v0.1.11 新增 Muse 图生视频优先推荐；继续仅停用 NSDD H3，保留 RH H3、NSDD SD2.5 和其他模型；基础安装不再等待剪辑依赖下载。图生视频优先 Muse 视频 · 多米，H3 / WAN 保留候选，首尾帧 H3 / VEO；三个快捷推荐之外可输入模型名。最低分辨率试稿，优先视频原声，剪辑确认后按需报价超分。2026-10-30 已核对 WAN 官方标准与 Prime 上线会员目录；实际可提交范围仍以当次目录为准。
 
 从剧本、人物/场景/道具和分镜资产，到会员 API 视频生产、声音字幕预览及 Windows 剪映交付。统一技能名称 **lingchuang-film**；随包包含短剧编剧、影视总导演和灵创生产客户端，未集成 Shotcraft。
 
@@ -22,13 +24,13 @@ v0.1.10：仅停用 NSDD H3，保留 RH H3、NSDD SD2.5 和其他模型；基础
 
 ## 按运行环境选择版本
 
-- **Windows v0.1.10**：保留浏览器会员授权、完整制作、剪映草稿和成片剪辑；下方 PowerShell/npm 命令继续安装 Windows 版。
-- **Linux 云端专用 v0.1.10-linux**：使用会员 API Key，云端执行，交付会员本人画布中的逐镜视频；不运行 Windows CLI、不强制剪映。详见 [Linux 安装与 Secret 配置](LINUX.md)。
+- **Windows v0.1.11**：保留浏览器会员授权、完整制作、剪映草稿和成片剪辑；下方 PowerShell/npm 命令继续安装 Windows 版。
+- **Linux 云端专用 v0.1.11-linux**：使用会员 API Key，云端执行，交付会员本人画布中的逐镜视频；不运行 Windows CLI、不强制剪映。详见 [Linux 安装与 Secret 配置](LINUX.md)。
 
 Linux 云端 Codex 安装：
 
 ```sh
-curl -fL --proto '=https' --tlsv1.2 https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10-linux/install-linux.sh -o install-linux.sh
+curl -fL --proto '=https' --tlsv1.2 https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.11-linux/install-linux.sh -o install-linux.sh
 bash install-linux.sh --app codex
 ```
 
@@ -44,7 +46,7 @@ bash install-linux.sh --app codex
 
 ```powershell
 $lcInstaller = Join-Path $env:TEMP ("lingchuang-install-" + [guid]::NewGuid().ToString('N') + ".ps1")
-Invoke-WebRequest -UseBasicParsing 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10/install.ps1' -OutFile $lcInstaller
+Invoke-WebRequest -UseBasicParsing 'https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.11/install.ps1' -OutFile $lcInstaller
 ```
 
 然后在**同一个窗口**，只复制执行下列与你使用的软件对应的一条命令，无需全部执行：
@@ -162,19 +164,19 @@ npx.cmd --yes github:sulongbin/lingchuang-film --app portable
 3. 提供作品目录、已有脚本和素材，选择短剧或商业路线。先确认方案，再分别确认图片和视频的有效报价。
 4. 验收最终素材后，先确认声音字幕短预览，再交付全片和剪映草稿。
 
-**验证边界：**新增智能体已做安装目录适配和隔离测试，不代表各客户端都已完成真实视频生成与剪映验收。见 [验证记录](VALIDATION-v0.1.10.md)。CLI 自带运行时，影视技能仍需要 Python；旧 Key 接入作为显式后备保留。
+**验证边界：**新增智能体已做安装目录适配和隔离测试，不代表各客户端都已完成真实视频生成与剪映验收。见 [验证记录](AUDIT-v0.1.11.md)。CLI 自带运行时，影视技能仍需要 Python；旧 Key 接入作为显式后备保留。
 
 ## 下载与资料
 
-- [v0.1.10 Windows 完整 ZIP](https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10/lingchuang-film-v0.1.10-windows.zip)
-- [SHA-256](https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.10/SHA256.txt)
+- [v0.1.11 Windows 完整 ZIP](https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.11/lingchuang-film-v0.1.11-windows.zip)
+- [SHA-256](https://lczyai.oss-cn-shanghai.aliyuncs.com/lczyai/downloads/lingchuang-film/v0.1.11/SHA256.txt)
 - [完整安装说明](INSTALL.md) · [智能体兼容表](COMPATIBILITY.md) · [使用与来源](USAGE.md)
-- [v0.1.10 更新说明](RELEASE-v0.1.10.md) · [历史更新](CHANGELOG.md)
+- [v0.1.11 更新说明](RELEASE-v0.1.11.md) · [历史更新](CHANGELOG.md)
 
 旧版发行包继续保留。安装器会备份可识别的旧版并在失败时恢复，不删除作品或历史任务。
 
 
-## v0.1.10 安装与授权变化
+## v0.1.11 安装与授权变化
 
 - Windows CLI 0.1.2：`login --start` 后台等待，`login --status <session_id>` 检查同一次授权；会员只在网页确认，智能体自动校验。已有授权升级后保留。
 - Windows 完整技能仍支持剪映。默认基础安装不下载剪辑依赖；需要时运行包内 `scripts/install-editing.ps1`，或 PowerShell 安装入口加 `-InstallEditingDependencies`。
@@ -182,4 +184,4 @@ npx.cmd --yes github:sulongbin/lingchuang-film --app portable
 - 独立 Linux CLI 0.2.1 支持官网设备授权和后台等待，见 [CLI.md](CLI.md)。Linux 影视技能的 cloud_entry 仍使用 Secret/API Key，尚未接回 CLI OAuth，勿混用两种入口。
 - CLI 自带回调结果页已包含在发行包；网站确认页的新版提示另待部署，现有授权接口可供新版 CLI 使用。
 
-[本版验证及使用边界](AUDIT-v0.1.10.md)。没有运行真实付费生成；各宿主真实用户授权仍需验收。
+[本版验证及使用边界](AUDIT-v0.1.11.md)。没有运行真实付费生成；各宿主真实用户授权仍需验收。
